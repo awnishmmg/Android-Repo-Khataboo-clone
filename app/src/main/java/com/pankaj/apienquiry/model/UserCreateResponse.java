@@ -2,16 +2,17 @@ package com.pankaj.apienquiry.model;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserCreateResponse {
-    private String code;
+    private int code;
     private String message;
     private boolean status;
-//    private List<Users> data= null;
+    private ArrayList<Users> data = null;
     private boolean error;
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
@@ -23,9 +24,9 @@ public class UserCreateResponse {
         return status;
     }
 
-//    public  List<Users> getData() {
-//        return data;
-//    }
+    public ArrayList<Users> getData() {
+        return data;
+    }
 
 
     public boolean isError() {

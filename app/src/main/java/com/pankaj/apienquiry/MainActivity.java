@@ -18,6 +18,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private EditText et_email, et_name, et_mobile, et_password;
+    private static final String TAG = "MainActivityTag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +40,16 @@ public class MainActivity extends AppCompatActivity {
         Call<UserCreateResponse> call = RetrofitClient
                 .getInstance()
                 .getAPI()
-                .createUser(new Users(name,email,mobile,password));
+                .createUser(name, email, mobile, password);
 
         call.enqueue(new Callback<UserCreateResponse>() {
             @Override
             public void onResponse(Call<UserCreateResponse> call, Response<UserCreateResponse> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
 
                     UserCreateResponse users = response.body();
-                    Log.d("error_s",response.body().toString());
-                    Toast.makeText(MainActivity.this, "success"+users.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                    Toast.makeText(MainActivity.this, "success" + users.getMessage(), Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -56,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<UserCreateResponse> call, Throwable t) {
-                Log.d("error_f",t.getMessage());
-                Toast.makeText(MainActivity.this, "failed "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                Toast.makeText(MainActivity.this, "failed " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
